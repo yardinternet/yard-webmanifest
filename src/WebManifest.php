@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace Yard\WebmanifestGenerator;
 
+use Yard\WebmanifestGenerator\Data\WebManifestData;
+use Yard\WebmanifestGenerator\Data\WebmanifestIconData;
 use Yard\WebmanifestGenerator\Traits\Helpers;
 
 class WebManifest
 {
     use Helpers;
 
-    private array $webmanifestData;
+    private WebManifestData $webmanifestData;
     private MaskableIcon $maskableIcon;
 
     public function __construct()
@@ -18,32 +20,19 @@ class WebManifest
         $this->maskableIcon = new MaskableIcon();
     }
 
+    /**
+     * @return array<string, mixed> Webmanifest Json data
+     */
     public function generate(): array
     {
         $this->setWebmanifestData();
 
-        return $this->webmanifestData;
+        return $this->webmanifestData->toArray();
     }
-
 
     private function setWebmanifestData(): void
     {
-        $pageName = get_bloginfo('name');
-        $this->webmanifestData = [
-            'lang' => get_bloginfo('language'),
-            'name' => $pageName,
-            'short_name' => strlen($pageName) > 11 ? substr($pageName, 0, 8) . '...' : $pageName,
-            'display' => 'standalone',
-            'description' => get_bloginfo('description'),
-            'prefer_related_applications' => false,
-            'orientation' => 'any',
-            'start_url' => get_bloginfo('url'),
-            'icons' => [ // default icon
-                [
-                    'src' => get_home_url() . '/favicon.ico',
-                ],
-            ],
-        ];
+        $this->webmanifestData = new WebManifestData('standalone', false, 'any', [new WebmanifestIconData()]);
 
         // Include icons when custom icon was set
         $this->setManifestIcon();
@@ -61,26 +50,25 @@ class WebManifest
             return;
         }
 
-        $this->webmanifestData['icons'] = []; // reset icon list
+        $this->webmanifestData->icons = []; // reset icon list
 
-        foreach (config('webmanifest.iconSizes', []) as $size) {
-            $icon = $this->maskableIcon->getBase64Icon($size);
+        foreach ($this->getConfigList('webmanifest-generator.iconSizes') as $size) {
+            $sizeInt = intval($size);
+
+            $icon = $this->maskableIcon->getBase64Icon($sizeInt);
 
             if (false === $icon) {
-                $icon = $this->maskableIcon->createBase64Icon($size, $favicon);
+                $icon = $this->maskableIcon->createBase64Icon($sizeInt, $favicon);
             }
 
-            $this->webmanifestData['icons'][] = [
-                'src' => $icon,
-                'sizes' => "{$size}x{$size}",
-                'type' => 'image/jpeg',
-            ];
+
+            $this->webmanifestData->addIcon(new WebmanifestIconData($icon, "{$sizeInt}x{$sizeInt}", 'image/jpeg'));
         }
     }
 
     private function getFavicon(): false|string
     {
-        $faviconPath = get_attached_file((int)get_option('site_icon')); // get full path to image
+        $faviconPath = get_attached_file((int) get_option('site_icon')); // get full path to image
 
         if (false === file_exists($faviconPath)) {
             return false;

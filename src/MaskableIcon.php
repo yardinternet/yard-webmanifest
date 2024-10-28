@@ -17,7 +17,9 @@ class MaskableIcon
 
     public function getBase64Icon(int $size): false|string
     {
-        return get_transient($this->getTransientName($size));
+        $icon = get_transient($this->getTransientName($size));
+
+        return is_string($icon) ? $icon : false;
     }
 
     public function createBase64Icon(int $size, string $favicon): string
