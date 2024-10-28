@@ -36,6 +36,6 @@ trait Helpers
 
     private function configValue(string $configItem): mixed
     {
-        return config("yard-waiting-room-block.{$configItem}");
+        return config("webmanifest-generator.{$configItem}");
     }
 }
