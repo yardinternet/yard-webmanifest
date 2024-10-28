@@ -1,9 +1,13 @@
 includes:
-    - vendor/szepeviktor/phpstan-wordpress/extension.neon
-    - vendor/larastan/larastan/extension.neon
+  - vendor/szepeviktor/phpstan-wordpress/extension.neon
+  - vendor/larastan/larastan/extension.neon
 
 parameters:
-    level: 9
-    paths:
-        - src
-    tmpDir: build/phpstan
+  ignoreErrors:
+    -
+      message: '#^Parameter \#2 \$replace of function __ expects array\<string, bool\|float\|int\|string\>, string given\.$#'
+      path: src/*
+  level: 9
+  paths:
+    - src
+  tmpDir: build/phpstan
