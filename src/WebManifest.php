@@ -64,7 +64,7 @@ class WebManifest
 
         $favicon = $this->getFavicon(); // get/update icon
 
-        if (false === $favicon) {
+        if ('' === $favicon) {
             return;
         }
 
@@ -75,7 +75,7 @@ class WebManifest
 
             $icon = $this->maskableIcon->getBase64Icon($size);
 
-            if (false === $icon) {
+            if ('' === $icon) {
                 $icon = $this->maskableIcon->createBase64Icon($size, $favicon);
             }
 
@@ -87,7 +87,7 @@ class WebManifest
         }
     }
 
-    private function getFavicon(): false|string
+    private function getFavicon(): string
     {
         /** @phpstan-ignore-next-line */
         $icon = intval(get_option('site_icon'));
@@ -95,9 +95,9 @@ class WebManifest
         $faviconPath = get_attached_file($icon); // get full path to image
 
         if (false === $faviconPath || false === file_exists($faviconPath)) {
-            return false;
+            return '';
         }
 
-        return file_get_contents($faviconPath);
+        return file_get_contents($faviconPath) ?: '';
     }
 }

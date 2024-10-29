@@ -15,11 +15,11 @@ class MaskableIcon
         $this->imageManager = ImageManager::gd();
     }
 
-    public function getBase64Icon(int $size): false|string
+    public function getBase64Icon(int $size): string
     {
         $icon = get_transient($this->getTransientName($size));
 
-        return is_string($icon) ? $icon : false;
+        return is_string($icon) ? $icon : '';
     }
 
     public function createBase64Icon(int $size, string $favicon): string
