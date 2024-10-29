@@ -19,7 +19,6 @@ class WebManifestData extends Data
     public string $orientation;
     /** @var Collection<int, WebmanifestIconData> */
     public Collection $icons;
-
     public string $background_color;
     public string $theme_color;
 }
