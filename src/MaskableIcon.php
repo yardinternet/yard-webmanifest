@@ -8,11 +8,8 @@ use Intervention\Image\ImageManager;
 
 class MaskableIcon
 {
-    private ImageManager $imageManager;
-
-    public function __construct(ImageManager $imageManager)
+    public function __construct(private ImageManager $imageManager)
     {
-        $this->imageManager = $imageManager;
     }
 
     public function getBase64Icon(int $size): string

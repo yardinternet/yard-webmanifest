@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Yard\WebmanifestGenerator;
 
-use Intervention\Image\ImageManager;
 use Webmozart\Assert\Assert;
 use Yard\WebmanifestGenerator\Data\WebManifestData;
 use Yard\WebmanifestGenerator\Data\WebmanifestIconData;
@@ -15,18 +14,16 @@ class WebManifest
     use Helpers;
 
     private WebManifestData $webmanifestData;
-    private MaskableIcon $maskableIcon;
 
-    public function __construct(ImageManager $imageManager)
+    public function __construct(private MaskableIcon $maskableIcon)
     {
-        $this->maskableIcon = new MaskableIcon($imageManager);
     }
 
     public function generate(): string
     {
         $this->setManifestData();
 
-        if (false === has_site_icon()) {
+        if (false !== has_site_icon()) {
             $this->setManifestIcons();
         }
 
