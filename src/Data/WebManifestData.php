@@ -45,8 +45,8 @@ class WebManifestData extends Data
         $this->start_url = get_bloginfo('url');
     }
 
-    public function addIcon(WebmanifestIconData $icon): void
+    public function addIcon(string $src, string $sizes, string $type): void
     {
-        $this->icons[] = $icon;
+        $this->icons[] = new WebmanifestIconData($src, $sizes, $type);
     }
 }

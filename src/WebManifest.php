@@ -33,7 +33,14 @@ class WebManifest
 
     private function setWebmanifestData(): void
     {
-        $this->webmanifestData = new WebManifestData('standalone', false, 'any', [new WebmanifestIconData()]);
+        $this->webmanifestData = new WebManifestData(
+            'standalone',
+            false,
+            'any',
+            [
+                new WebmanifestIconData(),
+            ]
+        );
 
         // Include icons when custom icon was set
         $this->setManifestIcon();
@@ -62,20 +69,18 @@ class WebManifest
                 $icon = $this->maskableIcon->createBase64Icon($size, $favicon);
             }
 
-
-            $this->webmanifestData->addIcon(new WebmanifestIconData($icon, "{$size}x{$size}", 'image/jpeg'));
+            $this->webmanifestData->addIcon($icon, "{$size}x{$size}", 'image/jpeg');
         }
     }
 
     private function getFavicon(): false|string
     {
-        $icon = get_option('site_icon');
-
-        Assert::integer($icon);
+        /** @phpstan-ignore-next-line */
+        $icon = intval(get_option('site_icon'));
 
         $faviconPath = get_attached_file($icon); // get full path to image
 
-        if (false === file_exists($faviconPath)) {
+        if (false === $faviconPath || false === file_exists($faviconPath)) {
             return false;
         }
 
