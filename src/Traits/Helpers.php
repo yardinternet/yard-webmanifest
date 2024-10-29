@@ -38,9 +38,4 @@ trait Helpers
     {
         return config("webmanifest-generator.{$configItem}");
     }
-
-    public function getDefaultFaviconPath(): string
-    {
-        return get_home_url() . '/favicon.ico';
-    }
 }
