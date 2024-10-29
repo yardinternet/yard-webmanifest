@@ -24,12 +24,17 @@ class WebManifest
 
     public function generate(): string
     {
-        $this->setWebmanifestData();
+        $this->setManifestData();
+
+        if (false === has_site_icon()) {
+            $this->setManifestIcons();
+        }
+
 
         return $this->webmanifestData->toJson();
     }
 
-    private function setWebmanifestData(): void
+    private function setManifestData(): void
     {
         $pageName = get_bloginfo('name');
 
@@ -52,22 +57,15 @@ class WebManifest
                 'theme_color' => $this->getConfig('theme_color'),
             ]
         );
-
-        // Include icons when custom icon was set
-        $this->setManifestIcon();
     }
 
-    private function setManifestIcon(): void
+    private function setManifestIcons(): void
     {
-        if (false === has_site_icon()) {
+        if (false === $this->hasSiteIcon()) {
             return;
         }
 
-        $favicon = $this->getFavicon(); // get/update icon
-
-        if ('' === $favicon) {
-            return;
-        }
+        $favicon = $this->getFavicon();
 
         $this->webmanifestData->icons = collect(); // reset icon list
 
@@ -86,6 +84,21 @@ class WebManifest
                 'type' => 'image/jpeg',
             ]));
         }
+    }
+
+    private function hasSiteIcon(): bool
+    {
+        if (false === has_site_icon()) {
+            return false;
+        }
+
+        $favicon = $this->getFavicon();
+
+        if (false === $favicon) {
+            return false;
+        }
+
+        return true;
     }
 
     private function getFavicon(): string
