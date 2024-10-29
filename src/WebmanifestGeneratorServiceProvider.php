@@ -20,9 +20,8 @@ class WebmanifestGeneratorServiceProvider extends PackageServiceProvider
 
     public function packageRegistered(): void
     {
-        $this->app->singleton(WebManifest::class);
-        $this->app->singleton(ImageManager::class, function () {
-            return ImageManager::gd();
+        $this->app->bind(MaskableIcon::class, function () {
+            return new MaskableIcon(ImageManager::gd());
         });
     }
 }
