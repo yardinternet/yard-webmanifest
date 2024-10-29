@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yard\WebmanifestGenerator\Traits;
+namespace Yard\Webmanifest\Traits;
 
 trait Helpers
 {
@@ -30,6 +30,6 @@ trait Helpers
 
     private function configValue(string $configItem): mixed
     {
-        return config("webmanifest-generator.{$configItem}");
+        return config("webmanifest.{$configItem}");
     }
 }

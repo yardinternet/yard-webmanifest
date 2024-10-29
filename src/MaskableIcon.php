@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yard\WebmanifestGenerator;
+namespace Yard\Webmanifest;
 
 use Intervention\Image\ImageManager;
 

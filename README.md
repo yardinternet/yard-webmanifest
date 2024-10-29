@@ -20,7 +20,7 @@ To install this package using Composer, follow these steps:
     ```json
     {
       "type": "vcs",
-      "url": "git@github.com:yardinternet/webmanifest-generator.git"
+      "url": "git@github.com:yardinternet/yard-webmanifest.git"
     }
     ```
 
@@ -39,5 +39,5 @@ To install this package using Composer, follow these steps:
 You can publish the config file with:
 
 ```shell
-wp acorn vendor:publish --provider="Yard\WebmanifestGenerator\WebmanifestGeneratorServiceProvider"
+wp acorn vendor:publish --provider="Yard\Webmanifest\WebmanifestServiceProvider"
 ```

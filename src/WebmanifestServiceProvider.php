@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Yard\WebmanifestGenerator;
+namespace Yard\Webmanifest;
 
 use Intervention\Image\ImageManager;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class WebmanifestGeneratorServiceProvider extends PackageServiceProvider
+class WebmanifestServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('webmanifest-generator')
+            ->name('webmanifest')
             ->hasConfigFile()
             ->hasRoute('web');
     }

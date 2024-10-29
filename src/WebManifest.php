@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Yard\WebmanifestGenerator;
+namespace Yard\Webmanifest;
 
 use Webmozart\Assert\Assert;
-use Yard\WebmanifestGenerator\Data\WebManifestData;
-use Yard\WebmanifestGenerator\Data\WebmanifestIconData;
-use Yard\WebmanifestGenerator\Traits\Helpers;
+use Yard\Webmanifest\Data\WebManifestData;
+use Yard\Webmanifest\Data\WebmanifestIconData;
+use Yard\Webmanifest\Traits\Helpers;
 
 class WebManifest
 {

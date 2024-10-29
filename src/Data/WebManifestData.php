@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yard\WebmanifestGenerator\Data;
+namespace Yard\Webmanifest\Data;
 
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;

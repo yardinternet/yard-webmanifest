@@ -1,5 +1,5 @@
 {
-  "name": "yard/webmanifest-generator",
+  "name": "yard/webmanifest",
   "type": "package",
   "description": "Creates web app manifests",
   "version": "1.0.0",
@@ -11,7 +11,7 @@
     }
   },
   "require": {
-    "php": "^8.0",
+    "php": ">=8.0",
     "intervention/image": "^3.9",
     "spatie/laravel-data": "^4.11",
     "spatie/laravel-package-tools": "^1.16",
@@ -27,12 +27,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Yard\\WebmanifestGenerator\\": "src/"
+      "Yard\\Webmanifest\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Yard\\WebmanifestGenerator\\Tests\\": "tests/"
+      "Yard\\Webmanifest\\Tests\\": "tests/"
     }
   },
   "scripts": {
@@ -47,11 +47,8 @@
   "extra": {
     "acorn": {
       "providers": [
-        "Yard\\WebmanifestGenerator\\WebmanifestGeneratorServiceProvider"
-      ],
-      "aliases": {
-        "WebmanifestGenerator": "Yard\\WebmanifestGenerator\\Facades\\WebmanifestGenerator"
-      }
+        "Yard\\Webmanifest\\WebmanifestServiceProvider"
+      ]
     }
   }
 }
