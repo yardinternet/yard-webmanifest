@@ -21,9 +21,6 @@ class WebManifest
         $this->maskableIcon = new MaskableIcon();
     }
 
-    /**
-     * @return array<string, mixed> Webmanifest Json data
-     */
     public function generate(): string
     {
         $this->setWebmanifestData();
