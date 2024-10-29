@@ -23,10 +23,9 @@ class WebManifest
     {
         $this->setManifestData();
 
-        if (false !== has_site_icon()) {
+        if (true === has_site_icon()) {
             $this->setManifestIcons();
         }
-
 
         return $this->webmanifestData->toJson();
     }
@@ -58,11 +57,11 @@ class WebManifest
 
     private function setManifestIcons(): void
     {
-        if (false === $this->hasSiteIcon()) {
+        $favicon = $this->getFavicon();
+
+        if ('' === $favicon) {
             return;
         }
-
-        $favicon = $this->getFavicon();
 
         $this->webmanifestData->icons = collect(); // reset icon list
 
@@ -81,21 +80,6 @@ class WebManifest
                 'type' => 'image/jpeg',
             ]));
         }
-    }
-
-    private function hasSiteIcon(): bool
-    {
-        if (false === has_site_icon()) {
-            return false;
-        }
-
-        $favicon = $this->getFavicon();
-
-        if (false === $favicon) {
-            return false;
-        }
-
-        return true;
     }
 
     private function getFavicon(): string
