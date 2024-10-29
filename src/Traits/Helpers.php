@@ -6,12 +6,6 @@ namespace Yard\WebmanifestGenerator\Traits;
 
 trait Helpers
 {
-    /**
-     * Make sure config always returns string
-     *
-     * @param string $configItem
-     * @param string $default
-     */
     public function getConfig(string $configItem, string $default = ''): string
     {
         $configVal = $this->configValue($configItem);
