@@ -10,9 +10,9 @@ class MaskableIcon
 {
     private ImageManager $imageManager;
 
-    public function __construct()
+    public function __construct(ImageManager $imageManager)
     {
-        $this->imageManager = ImageManager::gd();
+        $this->imageManager = $imageManager;
     }
 
     public function getBase64Icon(int $size): string
