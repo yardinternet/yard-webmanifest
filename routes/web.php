@@ -8,6 +8,8 @@ use Yard\WebmanifestGenerator\WebManifest;
 Route::get(
     '/' . config('webmanifest-generator.url'),
     function (WebManifest $webmanifest) {
-        return response()->json($webmanifest->generate());
+        return response($webmanifest->generate(), 200)
+            ->header('Content-Type', 'application/json');
+        ;
     }
 );

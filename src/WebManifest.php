@@ -24,11 +24,11 @@ class WebManifest
     /**
      * @return array<string, mixed> Webmanifest Json data
      */
-    public function generate(): array
+    public function generate(): string
     {
         $this->setWebmanifestData();
 
-        return $this->webmanifestData->toArray();
+        return $this->webmanifestData->toJson();
     }
 
     private function setWebmanifestData(): void
