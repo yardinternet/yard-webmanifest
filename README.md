@@ -27,7 +27,7 @@ To install this package using Composer, follow these steps:
 2. Install this package with Composer:
 
     ```sh
-    composer require yard/webmanifest-generator
+    composer require yard/webmanifest
     ```
 
 3. Run the Acorn WP-CLI command to discover this package:
