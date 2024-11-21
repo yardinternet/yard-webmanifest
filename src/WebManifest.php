@@ -23,8 +23,10 @@ class WebManifest
     {
         $this->setManifestData();
 
-        if (true === has_site_icon()) {
-            $this->setManifestIcons();
+        if (0 < count($this->getConfigList('icons', []))) {
+            $this->setConfiguredManifestIcons();
+        } elseif (true === has_site_icon()) {
+            $this->setFaviconManifestIcons();
         }
 
         return $this->webmanifestData->toJson();
@@ -65,7 +67,16 @@ class WebManifest
         );
     }
 
-    private function setManifestIcons(): void
+    private function setConfiguredManifestIcons(): void
+    {
+        $this->webmanifestData->icons = collect(); // reset icon list
+
+        foreach ($this->getConfigList('icons') as $icon) {
+            $this->webmanifestData->icons->push(WebmanifestIconData::from($icon));
+        }
+    }
+
+    private function setFaviconManifestIcons(): void
     {
         $favicon = $this->getFavicon();
 
