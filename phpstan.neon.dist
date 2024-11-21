@@ -3,10 +3,6 @@ includes:
   - vendor/larastan/larastan/extension.neon
 
 parameters:
-  ignoreErrors:
-    -
-      message: '#^Parameter \#2 \$replace of function __ expects array\<string, bool\|float\|int\|string\>, string given\.$#'
-      path: src/*
   level: 9
   paths:
     - src
