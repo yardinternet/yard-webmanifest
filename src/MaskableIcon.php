@@ -14,7 +14,8 @@ class MaskableIcon
 
     public function getBase64Icon(int $size): string
     {
-        $icon = get_transient($this->getTransientName($size));
+        //        $icon = get_transient($this->getTransientName($size));
+        $icon = null;
 
         return is_string($icon) ? $icon : '';
     }
@@ -41,8 +42,9 @@ class MaskableIcon
         // load and shrink icon
         $icon = $this->imageManager->read($favicon)->resize($newIconSize, $newIconSize);
 
+
         // merge icon with bg layer
-        $bg = $this->imageManager->create($size, $size)->fill('#fff')->place($icon, 'center');
+        $bg = $this->imageManager->create($size, $size)->place($icon, 'center');
 
         return 'data:image/png;base64,' . base64_encode((string) $bg->toPng());
     }
