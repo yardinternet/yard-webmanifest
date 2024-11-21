@@ -41,3 +41,45 @@ You can publish the config file with:
 ```shell
 wp acorn vendor:publish --provider="Yard\Webmanifest\WebmanifestServiceProvider"
 ```
+
+## Usage
+
+In theory you don't have to do anything, the Webmanifest works out of the box.
+This packages uses the favicon set in the theme to generate icons.
+
+But you can alter behavior via the configuration.
+
+### Manually configuring icons
+
+You can do this by adding them to the `icons` array in the [config](./config/webmanifest.php)
+
+```php
+'icons' => [
+  [
+    'src' => 'path/to/icon.png',
+    'sizes' => '192x192',
+    'type' => 'image/png',
+  ],
+],
+```
+
+### Theme settings
+
+You can set the background and theme color by changing the config values below.
+
+```php
+'background_color' => '#add8eb',
+'theme_color' => '#ffffff',
+```
+
+### Icon sizes
+
+```php
+'iconSizes' => [192, 384, 512, 1024],
+```
+
+### Webmanifest URL path
+
+```php
+'url' => '/manifest.webmanifest',
+```
