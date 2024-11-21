@@ -34,24 +34,34 @@ class WebManifest
     {
         $pageName = get_bloginfo('name');
 
-        $this->webmanifestData = WebManifestData::from(
-            [
-                'lang' => get_bloginfo('language'),
-                'name' => $pageName,
-                'shortName' => strlen($pageName) > 11 ? substr($pageName, 0, 8) . '...' : $pageName,
-                'display' => 'standalone',
-                'description' => get_bloginfo('description'),
-                'preferRelatedApplications' => false,
-                'orientation' => 'any',
-                'startUrl' => get_bloginfo('url'),
-                'icons' => [ // default icon
-                    [
-                        'src' => get_home_url() . '/favicon.ico',
-                    ],
+
+        $webmanifest = [
+            'lang' => get_bloginfo('language'),
+            'name' => $pageName,
+            'shortName' => strlen($pageName) > 11 ? substr($pageName, 0, 8) . '...' : $pageName,
+            'display' => 'standalone',
+            'description' => get_bloginfo('description'),
+            'preferRelatedApplications' => false,
+            'orientation' => 'any',
+            'startUrl' => get_bloginfo('url'),
+            'icons' => [ // default icon
+                [
+                    'src' => get_home_url() . '/favicon.ico',
                 ],
-                'backgroundColor' => $this->getConfig('background_color'),
-                'themeColor' => $this->getConfig('theme_color'),
-            ]
+            ],
+        ];
+
+        if ('' !== $this->getConfig('background_color')) {
+            $webmanifest['backgroundColor'] = $this->getConfig('background_color');
+        }
+
+        if ('' !== $this->getConfig('themeColor')) {
+            $webmanifest['themeColor'] = $this->getConfig('themeColor');
+        }
+
+
+        $this->webmanifestData = WebManifestData::from(
+            $webmanifest
         );
     }
 
@@ -77,7 +87,7 @@ class WebManifest
             $this->webmanifestData->icons->push(WebmanifestIconData::from([
                 'src' => $icon,
                 'sizes' => "{$size}x{$size}",
-                'type' => 'image/jpeg',
+                'type' => 'image/png',
             ]));
         }
     }

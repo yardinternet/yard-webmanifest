@@ -44,6 +44,6 @@ class MaskableIcon
         // merge icon with bg layer
         $bg = $this->imageManager->create($size, $size)->fill('#fff')->place($icon, 'center');
 
-        return 'data:image/jpeg;base64,' . base64_encode((string) $bg->toJpeg());
+        return 'data:image/png;base64,' . base64_encode((string) $bg->toPng());
     }
 }
