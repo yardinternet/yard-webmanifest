@@ -57,8 +57,8 @@ class WebManifest
             $webmanifest['backgroundColor'] = $this->getConfig('background_color');
         }
 
-        if ('' !== $this->getConfig('themeColor')) {
-            $webmanifest['themeColor'] = $this->getConfig('themeColor');
+        if ('' !== $this->getConfig('theme_color')) {
+            $webmanifest['themeColor'] = $this->getConfig('theme_color');
         }
 
 
