@@ -18,22 +18,22 @@ class WebmanifestServiceProvider extends PackageServiceProvider
 			->hasRoute('web');
 	}
 
-    public function packageRegistered(): void
-    {
-        $this->app->bind(MaskableIcon::class, function () {
-            return new MaskableIcon(ImageManager::gd());
-        });
-    }
+	public function packageRegistered(): void
+	{
+		$this->app->bind(MaskableIcon::class, function () {
+			return new MaskableIcon(ImageManager::gd());
+		});
+	}
 
-    public function packageBooted(): void
-    {
-        add_action('wp_head', $this->addManifestLinkToHead(...));
-    }
+	public function packageBooted(): void
+	{
+		add_action('wp_head', $this->addManifestLinkToHead(...));
+	}
 
-    public function addManifestLinkToHead(): void
-    {
-        $manifestPath = config('webmanifest.url');
+	public function addManifestLinkToHead(): void
+	{
+		$manifestPath = config('webmanifest.url');
 
-        echo "<link rel='manifest' href='{$manifestPath}'>\n";
-    }
+		echo "<link rel='manifest' href='{$manifestPath}'>\n";
+	}
 }
