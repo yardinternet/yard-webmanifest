@@ -26,7 +26,9 @@ class IconController extends Controller
 
 		abort_if(null === $iconData, 404);
 
-		return response(base64_decode($this->getIcon($iconData)))->header('Content-Type', 'image/png');
+		$icon = $this->getIcon($iconData);
+
+		return response($icon)->header('Content-Type', 'image/png');
 	}
 
 	private function parseIconName(string $iconName): ?IconData
