@@ -8,9 +8,12 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Yard\Webmanifest\Data\IconData;
 use Yard\Webmanifest\MaskableIcon;
+use Yard\Webmanifest\Traits\Helpers;
 
 class IconController extends Controller
 {
+	use Helpers;
+
 	public function __construct(private MaskableIcon $maskableIcon)
 	{
 	}
@@ -24,7 +27,9 @@ class IconController extends Controller
 	{
 		$iconData = $this->parseIconName($iconName);
 
-		abort_if(null === $iconData, 404);
+		$configuredSizes = $this->getConfigList('iconSizes');
+
+		abort_if(null === $iconData || false === in_array($iconData?->size ?? null, $configuredSizes), 404);
 
 		$icon = $this->getIcon($iconData);
 
