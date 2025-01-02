@@ -15,9 +15,16 @@ class IconData extends Data
 	public int $size = 0;
 	public string $extension = MaskableIcon::IMAGE_TYPE['extension']; // may not contain dots
 
+	/**
+	 * @return Collection<int, IconData> collection of iconData objects from configured sizes
+	 */
 	public static function fromConfiguredSizes(): Collection
 	{
-		$sizes = collect(config('webmanifest.iconSizes'));
+		$configSizes = config('webmanifest.iconSizes');
+
+		Assert::isArray($configSizes);
+
+		$sizes = collect($configSizes);
 
 		return $sizes->map(function (int $size) {
 			return IconData::from([
@@ -26,9 +33,6 @@ class IconData extends Data
 		});
 	}
 
-	/**
-	 * @return string fileName in format [name]_[size].[extention]. Example icon_512.png
-	 */
 	public function getFileName(): string
 	{
 		return "{$this->name}_{$this->size}.{$this->extension}";

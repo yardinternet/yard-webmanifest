@@ -18,11 +18,6 @@ class IconController extends Controller
 	{
 	}
 
-	/**
-	 * @param string $fileName must be in format '[name]_[size].[extention]'
-	 *
-	 * @return void
-	 */
 	public function index(string $iconName): Response
 	{
 		$iconData = $this->parseIconName($iconName);
@@ -30,7 +25,7 @@ class IconController extends Controller
 		$configuredSizes = $this->getConfigList('iconSizes');
 
 		// return 404 if wrong file name or if size is not in config
-		abort_if(null === $iconData || false === in_array($iconData?->size ?? null, $configuredSizes), 404);
+		abort_if(null === $iconData || false === in_array($iconData->size, $configuredSizes), 404);
 
 		$icon = $this->getIcon($iconData);
 

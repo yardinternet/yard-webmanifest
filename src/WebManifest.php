@@ -15,10 +15,6 @@ class WebManifest
 
 	private WebManifestData $webmanifestData;
 
-	public function __construct(private MaskableIcon $maskableIcon)
-	{
-	}
-
 	public function generate(): string
 	{
 		$this->setManifestData();
