@@ -18,14 +18,14 @@ class MaskableIcon
 	{
 	}
 
-	public function getIcon(IconData $iconData): string
+	public function getBase64Icon(IconData $iconData): string
 	{
 		$icon = get_transient($iconData->getFileName());
 
 		return is_string($icon) ? $icon : '';
 	}
 
-	public function createIcon(IconData $iconData, string $originalIcon): string
+	public function createBase64Icon(IconData $iconData, string $originalIcon): string
 	{
 		$icon = $this->makeIconMaskable($iconData->size, $originalIcon);
 
@@ -45,6 +45,6 @@ class MaskableIcon
 		// merge icon with bg layer
 		$bg = $this->imageManager->create($size, $size)->place($icon, 'center');
 
-		return (string) $bg->toPng();
+		return base64_encode((string) $bg->toPng());
 	}
 }

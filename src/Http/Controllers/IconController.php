@@ -50,13 +50,13 @@ class IconController extends Controller
 			return '';
 		}
 
-		$icon = $this->maskableIcon->getIcon($iconData);
+		$icon = $this->maskableIcon->getBase64Icon($iconData);
 
 		if ('' === $icon) {
-			$icon = $this->maskableIcon->createIcon($iconData, $favicon);
+			$icon = $this->maskableIcon->createBase64Icon($iconData, $favicon);
 		}
 
-		return $icon;
+		return base64_decode($icon) ?: '';
 	}
 
 	private function getFavicon(): string
