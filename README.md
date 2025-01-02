@@ -83,3 +83,9 @@ You can set the background and theme color by changing the config values below.
 ```php
 'url' => '/manifest.webmanifest',
 ```
+
+### Webmanifest icons url
+
+```php
+'iconUrl' => '/webmanifest/icon',
+```
