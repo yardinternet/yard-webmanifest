@@ -28,7 +28,7 @@ class IconController extends Controller
 
 		$icon = $this->getIcon($iconData);
 
-		return response($icon)->header('Content-Type', 'image/png');
+		return response($icon)->header('Content-Type', MaskableIcon::IMAGE_TYPE['mime']);
 	}
 
 	private function parseIconName(string $iconName): ?IconData
