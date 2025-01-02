@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
 	'url' => '/manifest.webmanifest',
-    'iconUrl' => '/webmanifest/icon',
+	'iconUrl' => '/webmanifest/icon',
 	'iconSizes' => [192, 384, 512, 1024],
 
 	// Theme color settings
