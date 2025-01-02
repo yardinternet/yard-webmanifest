@@ -9,6 +9,11 @@ use Yard\Webmanifest\Data\IconData;
 
 class MaskableIcon
 {
+	const IMAGE_TYPE = [
+		'mime' => 'image/png',
+		'extension' => 'png',
+	];
+
 	public function __construct(private ImageManager $imageManager)
 	{
 	}

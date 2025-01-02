@@ -82,7 +82,7 @@ class WebManifest
 			return WebmanifestIconData::from([
 				'src' => route('webmanifest.icon.route', $icon->getFileName()),
 				'sizes' => "{$icon->size}x{$icon->size}",
-				'type' => 'image/png',
+				'type' => MaskableIcon::IMAGE_TYPE['mime'],
 			]);
 		});
 	}

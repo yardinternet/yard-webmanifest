@@ -7,12 +7,13 @@ namespace Yard\Webmanifest\Data;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
 use Webmozart\Assert\Assert;
+use Yard\Webmanifest\MaskableIcon;
 
 class IconData extends Data
 {
 	public string $name = 'icon'; // may not contain underscores
 	public int $size = 0;
-	public string $extension = 'png'; // may not contain dots
+	public string $extension = MaskableIcon::IMAGE_TYPE['extension']; // may not contain dots
 
 	public static function fromConfiguredSizes(): Collection
 	{
