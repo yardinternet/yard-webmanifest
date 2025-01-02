@@ -7,19 +7,16 @@ namespace Yard\Webmanifest\Data;
 use Illuminate\Support\Collection;
 use Spatie\LaravelData\Data;
 use Webmozart\Assert\Assert;
-use Yard\Webmanifest\Traits\Helpers;
 
 class IconData extends Data
 {
-	use Helpers;
-
 	public string $name = 'icon'; // may not contain underscores
 	public int $size = 0;
 	public string $extension = 'png'; // may not contain dots
 
-	public function getConfiguredSizes(): Collection
+	public static function fromConfiguredSizes(): Collection
 	{
-		$sizes = collect($this->getConfigList('iconSizes'));
+		$sizes = collect(config('webmanifest.iconSizes'));
 
 		return $sizes->map(function (int $size) {
 			return IconData::from([
@@ -33,7 +30,7 @@ class IconData extends Data
 	 */
 	public function getFileName(): string
 	{
-		return `{$this->name}_{$this->size}.{$this->extension}`;
+		return "{$this->name}_{$this->size}.{$this->extension}";
 	}
 
 	public static function fromFileName(string $fileName): ?self

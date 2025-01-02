@@ -4,25 +4,29 @@ declare(strict_types=1);
 
 namespace Yard\Webmanifest\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Webmozart\Assert\Assert;
 use Yard\Webmanifest\Data\IconData;
-use Yard\Webmanifest\Data\WebmanifestIconData;
+use Yard\Webmanifest\MaskableIcon;
 
 class IconController extends Controller
 {
+	public function __construct(private MaskableIcon $maskableIcon)
+	{
+	}
+
 	/**
 	 * @param string $fileName must be in format '[name]_[size].[extention]'
 	 *
 	 * @return void
 	 */
-	public function index(string $iconName)
+	public function index(string $iconName): Response
 	{
 		$iconData = $this->parseIconName($iconName);
 
-		if (null === $iconData) {
-			return null;
-		}
+		abort_if(null === $iconData, 404);
+
+		return response(base64_decode($this->getIcon($iconData)))->header('Content-Type', 'image/png');
 	}
 
 	private function parseIconName(string $iconName): ?IconData
@@ -30,35 +34,21 @@ class IconController extends Controller
 		return IconData::fromFileName($iconName);
 	}
 
-	private function getIconnByFileName()
-	{
-	}
-
-	private function setFaviconManifestIcons(): void
+	private function getIcon(IconData $iconData): string
 	{
 		$favicon = $this->getFavicon();
 
 		if ('' === $favicon) {
-			return;
+			return '';
 		}
 
-		$this->webmanifestData->icons = collect(); // reset icon list
+		$icon = $this->maskableIcon->getIcon($iconData);
 
-		foreach ($this->getConfigList('iconSizes') as $size) {
-			Assert::integer($size);
-
-			$icon = $this->maskableIcon->getBase64Icon($size);
-
-			if ('' === $icon) {
-				$icon = $this->maskableIcon->createBase64Icon($size, $favicon);
-			}
-
-			$this->webmanifestData->icons->push(WebmanifestIconData::from([
-				'src' => $icon,
-				'sizes' => "{$size}x{$size}",
-				'type' => 'image/png',
-			]));
+		if ('' === $icon) {
+			$icon = $this->maskableIcon->createIcon($iconData, $favicon);
 		}
+
+		return $icon;
 	}
 
 	private function getFavicon(): string

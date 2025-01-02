@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Yard\Webmanifest;
 
-use Webmozart\Assert\Assert;
+use Yard\Webmanifest\Data\IconData;
 use Yard\Webmanifest\Data\WebManifestData;
 use Yard\Webmanifest\Data\WebmanifestIconData;
 use Yard\Webmanifest\Traits\Helpers;
@@ -76,41 +76,14 @@ class WebManifest
 
 	private function setFaviconManifestIcons(): void
 	{
-		$favicon = $this->getFavicon();
+		$icons = IconData::fromConfiguredSizes();
 
-		if ('' === $favicon) {
-			return;
-		}
-
-		$this->webmanifestData->icons = collect(); // reset icon list
-
-		foreach ($this->getConfigList('iconSizes') as $size) {
-			Assert::integer($size);
-
-			$icon = $this->maskableIcon->getBase64Icon($size);
-
-			if ('' === $icon) {
-				$icon = $this->maskableIcon->createBase64Icon($size, $favicon);
-			}
-
-			$this->webmanifestData->icons->push(WebmanifestIconData::from([
-				'src' => $icon,
-				'sizes' => "{$size}x{$size}",
+		$this->webmanifestData->icons = $icons->map(function (IconData $icon) {
+			return WebmanifestIconData::from([
+				'src' => route('webmanifest.icon.route', $icon->getFileName()),
+				'sizes' => "{$icon->size}x{$icon->size}",
 				'type' => 'image/png',
-			]));
-		}
-	}
-
-	private function getFavicon(): string
-	{
-		$icon = intval(get_option('site_icon'));
-
-		$faviconPath = get_attached_file($icon); // get full path to image
-
-		if (false === $faviconPath || false === file_exists($faviconPath)) {
-			return '';
-		}
-
-		return file_get_contents($faviconPath) ?: '';
+			]);
+		});
 	}
 }

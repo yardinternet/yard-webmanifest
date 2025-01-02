@@ -14,5 +14,5 @@ it('can get base64 icon from transiet', function () {
 		->with("Base64 icon {$size}px")
 		->andReturn('ICON BASE64');
 
-	expect($maskableIcon->getBase64Icon($size))->tobe('ICON BASE64');
+	expect($maskableIcon->getIcon($size))->tobe('ICON BASE64');
 });
