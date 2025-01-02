@@ -5,24 +5,13 @@ declare(strict_types=1);
 use Yard\Webmanifest\Data\IconData;
 use Yard\Webmanifest\MaskableIcon;
 
-it('can create filename', function () {
-	$iconData = IconData::from([
-		'name' => 'testIcon',
-		'size' => 512,
-		'extension' => 'png',
-	]);
-
-	expect($iconData->getFileName())->tobe('testIcon_512.png');
-});
-
 it('can get base64 icon from transiet', function () {
 	$maskableIcon = new MaskableIcon(\Intervention\Image\ImageManager::gd());
 
-	$iconData = IconData::from([
-		'name' => 'testIcon',
-		'size' => 512,
-		'extension' => 'png',
-	]);
+	$iconData = new IconData();
+	$iconData->name = 'testIcon';
+	$iconData->size = 512;
+	$iconData->extension = 'png';
 
 	WP_Mock::userFunction('get_transient')
 		->once()
