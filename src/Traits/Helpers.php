@@ -41,6 +41,7 @@ trait Helpers
 		$wp_query->set_404();
 		\status_header(404);
 
+		// @phpstan-ignore-next-line
 		if (view()->exists('404')) {
 			return view('404');
 		} else {
