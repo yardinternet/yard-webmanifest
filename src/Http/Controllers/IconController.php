@@ -6,6 +6,7 @@ namespace Yard\Webmanifest\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 use Yard\Webmanifest\Data\IconData;
 use Yard\Webmanifest\MaskableIcon;
 use Yard\Webmanifest\Traits\Helpers;
@@ -18,14 +19,16 @@ class IconController extends Controller
 	{
 	}
 
-	public function index(string $iconName): Response
+	public function index(string $iconName): Response|View
 	{
 		$iconData = $this->parseIconName($iconName);
 
 		$configuredSizes = $this->getConfigList('iconSizes');
 
 		// return 404 if wrong file name or if size is not in config
-		abort_if(null === $iconData || false === in_array($iconData->size, $configuredSizes), 404);
+		if (null === $iconData || false === in_array($iconData->size, $configuredSizes)) {
+			return $this->dieAndNotFound();
+		}
 
 		$icon = $this->getIcon($iconData);
 

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Yard\Webmanifest\Traits;
 
+use Illuminate\View\View;
+
 trait Helpers
 {
 	public function getConfig(string $configItem, string $default = ''): string
@@ -31,5 +33,18 @@ trait Helpers
 	private function configValue(string $configItem): mixed
 	{
 		return config("webmanifest.{$configItem}");
+	}
+
+	private function dieAndNotFound(): View
+	{
+		global $wp_query;
+		$wp_query->set_404();
+		\status_header(404);
+
+		if (view()->exists('404')) {
+			return view('404');
+		} else {
+			die();
+		}
 	}
 }
