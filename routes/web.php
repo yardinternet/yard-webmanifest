@@ -13,4 +13,4 @@ Route::get(
 	}
 )->name('webmanifest.manifest');
 
-Route::get(config('webmanifest.iconUrl').'/{iconName}', [\Yard\Webmanifest\Http\Controllers\IconController::class, 'index'])->name('webmanifest.icon.route');
+Route::get(config('webmanifest.iconUrl').'/{iconName}', [\Yard\Webmanifest\Http\Controllers\IconController::class, 'index'])->name('webmanifest.icon');
