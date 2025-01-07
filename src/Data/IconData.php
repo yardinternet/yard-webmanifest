@@ -48,16 +48,16 @@ class IconData extends Data
 
 		Assert::string($iconNameAndsuffix[1]);
 
-		$sizeAndExtention = explode('.', $iconNameAndsuffix[1]);
+		$sizeAndExtension = explode('.', $iconNameAndsuffix[1]);
 
-		if (2 !== count($sizeAndExtention)) {
+		if (2 !== count($sizeAndExtension)) {
 			return null;
 		}
 
 		return IconData::from([
 			'name' => $iconNameAndsuffix[0],
-			'size' => $sizeAndExtention[0],
-			'extension' => $sizeAndExtention[1],
+			'size' => $sizeAndExtension[0],
+			'extension' => $sizeAndExtension[1],
 		]);
 	}
 }
