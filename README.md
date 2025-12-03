@@ -1,4 +1,4 @@
-# Yard webmanifest-generator
+# wp-webmanifest
 
 [![Code Style](https://github.com/yardinternet/yard-webmanifest/actions/workflows/format-php.yml/badge.svg?no-cache)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/format-php.yml)
 [![PHPStan](https://github.com/yardinternet/yard-webmanifest/actions/workflows/phpstan.yml/badge.svg?no-cache)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/phpstan.yml)
