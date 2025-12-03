@@ -6,6 +6,11 @@
 [![Code Coverage Badge](https://github.com/yardinternet/yard-webmanifest/blob/badges/coverage.svg)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/badges.yml)
 [![Lines of Code Badge](https://github.com/yardinternet/yard-webmanifest/blob/badges/lines-of-code.svg)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/badges.yml)
 
+This package for WordPress (Sage & Acorn) automatically generates a
+[manifest.webmanifest](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest) JSON file.
+It also creates maskable versions of the favicon that will be used as
+the [icons](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/icons).
+
 ## Requirements
 
 - [Sage](https://github.com/roots/sage) >= 10.0
@@ -15,22 +20,13 @@
 
 To install this package using Composer, follow these steps:
 
-1. Add the following to the `repositories` section of your `composer.json`:
-
-    ```json
-    {
-      "type": "vcs",
-      "url": "git@github.com:yardinternet/yard-webmanifest.git"
-    }
-    ```
-
-2. Install this package with Composer:
+1. Install this package with Composer:
 
     ```sh
     composer require yard/webmanifest
     ```
 
-3. Run the Acorn WP-CLI command to discover this package:
+2. Run the Acorn WP-CLI command to discover this package:
 
     ```shell
     wp acorn package:discover
