@@ -89,3 +89,7 @@ You can set the background and theme color by changing the config values below.
 ```php
 'iconUrl' => '/webmanifest/icon',
 ```
+
+## About us
+
+[![banner](https://raw.githubusercontent.com/yardinternet/.github/refs/heads/main/profile/assets/small-banner-github.svg)](https://www.yard.nl/werken-bij/)
