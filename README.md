@@ -1,10 +1,10 @@
 # Yard webmanifest-generator
 
-[![Code Style](https://github.com/yardinternet/webmanifest-generator/actions/workflows/format-php.yml/badge.svg?no-cache)](https://github.com/yardinternet/webmanifest-generator/actions/workflows/format-php.yml)
-[![PHPStan](https://github.com/yardinternet/webmanifest-generator/actions/workflows/phpstan.yml/badge.svg?no-cache)](https://github.com/yardinternet/webmanifest-generator/actions/workflows/phpstan.yml)
-[![Tests](https://github.com/yardinternet/webmanifest-generator/actions/workflows/run-tests.yml/badge.svg?no-cache)](https://github.com/yardinternet/webmanifest-generator/actions/workflows/run-tests.yml)
-[![Code Coverage Badge](https://github.com/yardinternet/webmanifest-generator/blob/badges/coverage.svg)](https://github.com/yardinternet/webmanifest-generator/actions/workflows/badges.yml)
-[![Lines of Code Badge](https://github.com/yardinternet/webmanifest-generator/blob/badges/lines-of-code.svg)](https://github.com/yardinternet/webmanifest-generator/actions/workflows/badges.yml)
+[![Code Style](https://github.com/yardinternet/yard-webmanifest/actions/workflows/format-php.yml/badge.svg?no-cache)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/format-php.yml)
+[![PHPStan](https://github.com/yardinternet/yard-webmanifest/actions/workflows/phpstan.yml/badge.svg?no-cache)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/phpstan.yml)
+[![Tests](https://github.com/yardinternet/yard-webmanifest/actions/workflows/run-tests.yml/badge.svg?no-cache)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/run-tests.yml)
+[![Code Coverage Badge](https://github.com/yardinternet/yard-webmanifest/blob/badges/coverage.svg)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/badges.yml)
+[![Lines of Code Badge](https://github.com/yardinternet/yard-webmanifest/blob/badges/lines-of-code.svg)](https://github.com/yardinternet/yard-webmanifest/actions/workflows/badges.yml)
 
 ## Requirements
 
